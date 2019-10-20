@@ -31,20 +31,21 @@ class AddCarVC: UIViewController {
         let model = modelTextField.text ?? ""
         let type = typeTextField.text ?? ""
         let color = colorTextField.text ?? ""
-        
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let newCar = CarsInfo(context: context)
-        newCar.yearOfManufacture = yearOfManufacture
-        newCar.manufacture = manufacture
-        newCar.model = model
-        newCar.type = type
-        newCar.color = color
-        newCar.carId = UUID().uuidString
-        
+    
         if yearOfManufacture.isEmpty || manufacture.isEmpty || model.isEmpty || type.isEmpty {
             showAlert()
+        
         } else {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let context = appDelegate.persistentContainer.viewContext
+            let newCar = CarsInfo(context: context)
+            newCar.yearOfManufacture = yearOfManufacture
+            newCar.manufacture = manufacture
+            newCar.model = model
+            newCar.type = type
+            newCar.color = color
+            newCar.carId = UUID().uuidString
+            
             if let uniqueId = newCar.carId {
                 print("carId: \(uniqueId)")
             }
