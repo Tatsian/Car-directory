@@ -1,11 +1,3 @@
-//
-//  CoreDataManager.swift
-//  CarsUIApp
-//
-//  Created by Tatsiana on 20.10.2019.
-//  Copyright © 2019 Tati. All rights reserved.
-//
-
 import UIKit
 import CoreData
 
@@ -34,7 +26,6 @@ class CoreDataManager {
         return context
     }()
     
-
     func getCarsList() -> [CarsInfo] {
         let fetchRequest = CarsInfo.fetchRequest() as NSFetchRequest<CarsInfo>
         do {
@@ -44,7 +35,7 @@ class CoreDataManager {
             return []
         }
     }
-    
+
     func save(car: Car, oldCar: CarsInfo? = nil) {
         let newCar = oldCar ?? CarsInfo(context: context)
         newCar.yearOfManufacture = car.yearOfManufacture
@@ -73,5 +64,4 @@ class CoreDataManager {
         }
         UserDefaults.standard.set(true, forKey: "didAddDefaultCars")
     }
-    
 }

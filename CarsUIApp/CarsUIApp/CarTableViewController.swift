@@ -4,8 +4,7 @@ import CoreData
 class CarTableViewController: UITableViewController {
 
     var carArray = [CarsInfo]()
-    
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         CoreDataManager.shared.addDefaultCarsIfNeeded()
@@ -16,31 +15,11 @@ class CarTableViewController: UITableViewController {
         carArray = CoreDataManager.shared.getCarsList()
         self.tableView.reloadData()
     }
-//
-//    func createNewCar(new: Car) -> CarsInfo {
-//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-//        let context = appDelegate.persistentContainer.viewContext
-//        let newCar = CarsInfo(context: context)
-//        newCar.yearOfManufacture = new.yearOfManufacture
-//        newCar.manufacture = new.manufacture
-//        newCar.model = new.model
-//        newCar.type = new.type
-//        newCar.color = new.color
-//        newCar.carId = UUID().uuidString
-//
-//        return newCar
-//    }
-//
-//    func addToArray(car: CarsInfo) {
-//        carArray.append(car)
-//    }
-
+    
     static func storyboardInstance() -> AddCarVC? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         return storyboard.instantiateViewController(withIdentifier: "AddCarVC") as? AddCarVC
     }
-
-
 
     // MARK: - Table view data source
 
@@ -70,18 +49,8 @@ class CarTableViewController: UITableViewController {
         let navigationController = UINavigationController(rootViewController: testVC)
         navigationController.modalPresentationStyle = .fullScreen
         self.present(navigationController, animated: true, completion: nil)
-
- //       performSegue(withIdentifier: "goToOneCar", sender: self)
     }
-    
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        guard segue.identifier == "goToOneCar" else { return}
-//        guard let indexPath = tableView.indexPathForSelectedRow else { return }
-//        (segue.destination as? AddCarVC)?.car = carArray[indexPath.row]
-//        tableView.deselectRow(at: indexPath, animated: true)
-//    }
 
-    
     // MARK: - Navigation
  
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
