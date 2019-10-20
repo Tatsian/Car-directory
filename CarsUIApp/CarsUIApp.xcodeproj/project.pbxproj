@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5B619B5E235C803600F0B079 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B619B5D235C803600F0B079 /* Structs.swift */; };
+		5B619B60235CD0B700F0B079 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B619B5F235CD0B600F0B079 /* CoreDataManager.swift */; };
 		5BFC41F92359DD650088024C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC41F82359DD650088024C /* AppDelegate.swift */; };
 		5BFC41FB2359DD650088024C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC41FA2359DD650088024C /* SceneDelegate.swift */; };
 		5BFC41FD2359DD650088024C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BFC41FC2359DD650088024C /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 
 /* Begin PBXFileReference section */
 		5B619B5D235C803600F0B079 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
+		5B619B5F235CD0B600F0B079 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		5BFC41F52359DD650088024C /* CarsUIApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarsUIApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5BFC41F82359DD650088024C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5BFC41FA2359DD650088024C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -71,6 +73,7 @@
 				5B619B5D235C803600F0B079 /* Structs.swift */,
 				5BFC42152359E7AA0088024C /* AddCarVC.swift */,
 				5BFC420F2359DE210088024C /* CarTableViewController.swift */,
+				5B619B5F235CD0B600F0B079 /* CoreDataManager.swift */,
 				5BFC42042359DD690088024C /* Assets.xcassets */,
 				5BFC42062359DD690088024C /* LaunchScreen.storyboard */,
 				5BFC42092359DD690088024C /* Info.plist */,
@@ -156,6 +159,7 @@
 				5B619B5E235C803600F0B079 /* Structs.swift in Sources */,
 				5BFC42102359DE210088024C /* CarTableViewController.swift in Sources */,
 				5BFC42162359E7AA0088024C /* AddCarVC.swift in Sources */,
+				5B619B60235CD0B700F0B079 /* CoreDataManager.swift in Sources */,
 				5BFC41FB2359DD650088024C /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

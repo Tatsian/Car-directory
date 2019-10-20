@@ -11,7 +11,7 @@ class AddCarVC: UIViewController {
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     
-    var car: CarsInfo!
+    var car: CarsInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,8 @@ class AddCarVC: UIViewController {
         typeTextField.text = openedCar.type
         yearOfManufacturTextField.text = openedCar.yearOfManufacture
         colorTextField.text = openedCar.color
-        navigationItem.title = openedCar.model! + openedCar.type! + " detail"
+        guard let model = openedCar.model, let type = openedCar.type else { return }
+        navigationItem.title = model + " " + type + " detail"
     }
     
     @IBAction func saveTapped(_ sender: UIButton) {
@@ -36,25 +37,12 @@ class AddCarVC: UIViewController {
             showAlert()
         
         } else {
-            let appDelegate = UIApplication.shared.delegate as! AppDelegate
-            let context = appDelegate.persistentContainer.viewContext
-            let newCar = CarsInfo(context: context)
-            newCar.yearOfManufacture = yearOfManufacture
-            newCar.manufacture = manufacture
-            newCar.model = model
-            newCar.type = type
-            newCar.color = color
-            newCar.carId = UUID().uuidString
-            
-            if let uniqueId = newCar.carId {
-                print("carId: \(uniqueId)")
-            }
-            
-            do{
-                try context.save()
-            } catch let error {
-                print("Failed to save due to error \(error).")
-            }
+            let newCar = Car(yearOfManufacture: yearOfManufacture,
+                             manufacture: manufacture,
+                             model: model,
+                             type: type,
+                             color: color)
+            CoreDataManager.shared.save(car: newCar, oldCar: car)
             dismiss(animated: true, completion: nil)
         }
     }

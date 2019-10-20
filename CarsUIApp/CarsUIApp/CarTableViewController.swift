@@ -5,52 +5,35 @@ class CarTableViewController: UITableViewController {
 
     var carArray = [CarsInfo]()
     
-    let mercedes = Car(yearOfManufacture: "2016", manufacture: "Mercedes", model: "E300", type: "sedan", color: "red")
-    let audi = Car(yearOfManufacture: "2010", manufacture: "Audi", model: "A6", type: "wagon", color: "green")
-    let lexus = Car(yearOfManufacture: "2014", manufacture: "Lexus", model: "XC10", type: "coupe", color: "gray")
-
-
     
     override func viewDidLoad() {
         super.viewDidLoad()
-  
-        createNewCar(new: audi)
-        
+        CoreDataManager.shared.addDefaultCarsIfNeeded()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let fetchRequest = CarsInfo.fetchRequest() as NSFetchRequest<CarsInfo>
-        do {
-            carArray = try context.fetch(fetchRequest)
-        } catch let error {
-            print("error: \(error)")
-        }
-        
-        DispatchQueue.main.async {
-            self.tableView.reloadData()
-        }
+        carArray = CoreDataManager.shared.getCarsList()
+        self.tableView.reloadData()
     }
-    
-    func createNewCar(new: Car) {
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context = appDelegate.persistentContainer.viewContext
-        let newCar = CarsInfo(context: context)
-        newCar.yearOfManufacture = new.yearOfManufacture
-        newCar.manufacture = new.manufacture
-        newCar.model = new.model
-        newCar.type = new.type
-        newCar.color = new.color
-        newCar.carId = UUID().uuidString
-        
-        addToArray(car: newCar)
-    }
-    
-    func addToArray(car: CarsInfo) {
-        carArray.append(car)
-    }
+//
+//    func createNewCar(new: Car) -> CarsInfo {
+//        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+//        let context = appDelegate.persistentContainer.viewContext
+//        let newCar = CarsInfo(context: context)
+//        newCar.yearOfManufacture = new.yearOfManufacture
+//        newCar.manufacture = new.manufacture
+//        newCar.model = new.model
+//        newCar.type = new.type
+//        newCar.color = new.color
+//        newCar.carId = UUID().uuidString
+//
+//        return newCar
+//    }
+//
+//    func addToArray(car: CarsInfo) {
+//        carArray.append(car)
+//    }
 
     static func storyboardInstance() -> AddCarVC? {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -81,10 +64,12 @@ class CarTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let testVC = CarTableViewController.storyboardInstance()
-        testVC?.car = carArray[indexPath.row]
         tableView.deselectRow(at: indexPath, animated: true)
-        self.present(testVC!, animated: true, completion: nil)
+        guard let testVC = CarTableViewController.storyboardInstance() else { return }
+        testVC.car = carArray[indexPath.row]
+        let navigationController = UINavigationController(rootViewController: testVC)
+        navigationController.modalPresentationStyle = .fullScreen
+        self.present(navigationController, animated: true, completion: nil)
 
  //       performSegue(withIdentifier: "goToOneCar", sender: self)
     }
